@@ -1,34 +1,29 @@
 package com.digipay.controller;
 
 import com.digipay.model.entity.Store;
+import com.digipay.repositiry.StoreRepository;
 import com.digipay.service.BaseService;
+import com.digipay.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/store")
-public class StoreControllerImpl  extends BaseControllerImpl<Store> {
-
+public class StoreControllerImpl extends BaseControllerImpl<Store> {
     @Autowired
-    private BaseService<Store> baseService;
+    private StoreService storeService;
 
-//    @Autowired
-//    private AccessController accessController;
-
-//    private Boolean accessFlag=false;
-    @PutMapping("/{id}")
     @Override
-    public String update(@PathVariable Integer id, @RequestBody Store store
-            , @RequestHeader HttpHeaders headers) {
-//        userNationalID=httpServletRequest.getHeader("userNationalID");
-//        accessFlag = accessController.checkAccess(userNationalID, "update");
-        if (accessFlag) {
-            Store storeFetched = baseService.listByID(id);
-            baseService.update(store, storeFetched);
-            return "Store updated!";
-        }else {
-            throw new RuntimeException();
-        }
+    @GetMapping("/add")
+    public void add(@RequestHeader("productCount") int productCount) {
+
+        storeService.add(productCount);
+    }
+    @Override
+    @GetMapping("/remove")
+    public void remove(@RequestHeader("productCount") int productCount) {
+        storeService.remove(productCount);
+
     }
 }

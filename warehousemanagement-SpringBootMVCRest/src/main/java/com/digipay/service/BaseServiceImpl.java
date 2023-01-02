@@ -46,4 +46,12 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     public void update(T EntityNew, T EntityFetched) {
 
     }
+    @Override
+    public void add(int productCount) {
+
+    }
+    @Override
+    public void remove(int productCount) {
+
+    }
 }

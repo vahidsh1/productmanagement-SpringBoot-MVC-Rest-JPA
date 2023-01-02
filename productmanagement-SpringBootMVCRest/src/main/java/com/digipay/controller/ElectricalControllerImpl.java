@@ -17,7 +17,7 @@ public class ElectricalControllerImpl extends BaseControllerImpl<ElectricalProdu
 
     private Boolean accessFlag = false;
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     @Override
     public String update(@PathVariable Integer id, @RequestBody ElectricalProduct electricalProductNew
             , @RequestParam String userNationalID) {

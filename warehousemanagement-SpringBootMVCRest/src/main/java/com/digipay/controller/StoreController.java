@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 
 public interface StoreController  extends BaseController<Store> {
 
-    public String update(Integer id, Store store, HttpHeaders headers);
+    public void add(int productCount);
+    public void remove(int productCount);
 
 }

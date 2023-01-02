@@ -13,4 +13,7 @@ public interface BaseService<T> {
 
     public void delete(int id);
 
+    public void add(int productCount);
+    public void remove(int productCount);
+
 }

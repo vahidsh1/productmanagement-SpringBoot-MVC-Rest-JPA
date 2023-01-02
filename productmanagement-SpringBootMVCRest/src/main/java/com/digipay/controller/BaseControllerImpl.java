@@ -1,5 +1,4 @@
 package com.digipay.controller;
-
 import com.digipay.service.BaseService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.*;
@@ -7,7 +6,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 public class BaseControllerImpl<T> implements BaseController<T> {
     @Autowired
     HttpServletRequest httpServletRequest;
@@ -28,10 +26,7 @@ public class BaseControllerImpl<T> implements BaseController<T> {
         } else {
             throw new RuntimeException();
         }
-
     }
-
-    //todo: add check user access before crud operation
     @PostMapping("/")
     @Override
     public String create(@RequestBody T t, @RequestHeader HttpHeaders headers) {
@@ -44,14 +39,7 @@ public class BaseControllerImpl<T> implements BaseController<T> {
             throw new RuntimeException();
         }
     }
-
-//    @Override
-//    public String delete(int id, String userNationalID) {
-//        return null;
-//    }
-
     @DeleteMapping("/{id}")
-
 //    @Override
     public String delete( @PathVariable Integer id,@RequestHeader HttpHeaders headers) {
          userNationalID = httpServletRequest.getHeader("userNationalID");
@@ -67,5 +55,4 @@ public class BaseControllerImpl<T> implements BaseController<T> {
     public String update(Integer id,  T t, HttpHeaders headers) {
         return "Product updated!";
     }
-
 }
