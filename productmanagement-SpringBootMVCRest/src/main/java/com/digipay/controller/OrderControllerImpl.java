@@ -5,6 +5,7 @@ import com.digipay.model.entity.Order;
 //import com.digipay.repository.OrderRepository;
 import com.digipay.service.CustomerService;
 import com.digipay.service.OrderService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,7 +63,7 @@ public class OrderControllerImpl implements OrderController {
     //id = Order ID
     @PostMapping("/return/{id}")
     @Override
-    public String returnOrder(@PathVariable Integer id) {
+    public String returnOrder(@PathVariable Integer id) throws JsonProcessingException {
         Order orderFetched = orderService.listByID(id);
         orderService.returnOrder(orderFetched);
         return "Order status updated to returned!";

@@ -4,6 +4,7 @@ import com.digipay.model.entity.Customer;
 import com.digipay.model.entity.Order;
 import com.digipay.repository.CustomerRepository;
 import com.digipay.repository.OrderRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
     @Autowired
     private WarehouseService warehouseService;
 
+    @Autowired
+    InvoiceService invoiceService;
     public OrderServiceImpl(OrderRepository orderRepository) {
 
         this.orderRepository = orderRepository;
@@ -46,13 +49,15 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
         return orderList;
     }
 
-    public void returnOrder(Order orderFetched) {
+    public void returnOrder(Order orderFetched) throws JsonProcessingException {
         orderFetched.setOrderStatus("Returned");
         Date currentDate = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         orderFetched.setOrderReturnDate(formatter.format(currentDate));
         orderRepository.save(orderFetched);
         warehouseService.increaseStockWareHouse();
+        invoiceService.sendOrderToRabbitMQ(orderFetched);
+
     }
 
     public void finalizeOrder(Order orderFetched) {
