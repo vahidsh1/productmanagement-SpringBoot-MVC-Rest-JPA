@@ -1,4 +1,4 @@
-package com.example.invoiceconsumer;
+package com.digipay.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
