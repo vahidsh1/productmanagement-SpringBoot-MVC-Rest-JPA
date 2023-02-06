@@ -1,6 +1,5 @@
 package com.digipay.controller;
 
-import external.client.generated.User;
 import org.springframework.http.HttpHeaders;
 
 import java.util.List;

@@ -8,6 +8,8 @@ class DigipayApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+
 	}
 
 }
